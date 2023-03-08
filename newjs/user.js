@@ -16,12 +16,14 @@ for(cell of suudoku_bord_Els){
   })
 }
 $("#number>div>div").on("click",function(){
-  let key = $("this").text();
+  let key = $(this).text();
   if(isNaN(key)||key>9||key<0)  key = "";
   game_bord[target.colmun][target.row]= key ? key:0;
   target.length=0;
   $(".select").text(key);
   $(".select").removeClass();
+    $("#number").removeClass();
+    $("#number").addClass("inputOff");
 })
 window.addEventListener("keyup",function(event){
   let key = Number(event.key);
