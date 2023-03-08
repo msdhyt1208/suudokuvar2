@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>数独</title>
+</head>
+<body>
+  <header><button id="button-start">開始</button><button id="button-cheak">チェック</button><button id="button-auto">自動</button><button id="button-ptn">パターン</button><button id="button-cls">クリア</button>
+  </header>
+  <main>
+    <div class="colmun">
+      <ul id="block1"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block2"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block3"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+    </div>
+    <div class="colmun">
+      <ul id="block4"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block5"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block6"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+    </div>
+    <div class="colmun">
+      <ul id="block7"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block8"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+      <ul id="block9"><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li><li><div class="possible"></div></li></ul>  
+    </div>
+    <div class="cross">
+      <div class="colmun"><div><span id="c1"></span><span id="c2"></span><span id="c3"></span></div>
+                          <div><span id="c4"></span><span id="c5"></span><span id="c6"></span></div>
+                          <div><span id="c7"></span><span id="c8"></span><span id="c9"></span></div>
+                        </div>
+      <div class="row">   <div><span id="r1"></span><span id="r2"></span><span id="r3"></span></div>
+                          <div><span id="r4"></span><span id="r5"></span><span id="r6"></span></div>
+                          <div><span id="r7"></span><span id="r8"></span><span id="r9"></span></div>
+                        </div>
+    </div>
+    <!-- <div id="clear"><a href="/"><h1> 成功終了</h1></a></div> -->
+
+    <div id="numbar" class="inputOff">
+      <div class="numbar-row">
+        <div class="numbar-colmun" draggable="true">1</div>
+        <div class="numbar-colmun" draggable="true">2</div>
+        <div class="numbar-colmun" draggable="true">3</div>
+      </div>
+      <div class="numbar-row">
+        <div class="numbar-colmun" draggable="true">4</div>
+        <div class="numbar-colmun" draggable="true">5</div>
+        <div class="numbar-colmun" draggable="true">6</div>
+      </div>
+      <div class="numbar-row">
+        <div class="numbar-colmun" draggable="true">7</div>
+        <div class="numbar-colmun" draggable="true">8</div>
+        <div class="numbar-colmun" draggable="true">9</div>
+      </div>
+      <div class="numbar-row">
+        <div class="numbar-colmun" draggable="true">✕</div>
+      </div>
+    </div>
+    
+  </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="./js/myjqery.js"></script>
+  <script src="./newjs/stop.js"></script>
+  <script src="./newjs/game.js"></script>
+  
+  <script src="./newjs/user.js"></script>
+  <!-- <script src="./js/tool.js"></script>
+  <script src="./js/cheak.js"></script>
+  <script src="./js/auto.js"></script> -->
+
+  
+</body>
+</html>
