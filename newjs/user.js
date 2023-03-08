@@ -3,8 +3,8 @@ for(cell of suudoku_bord_Els){
   cell.addEventListener("click",function(){
     $(".select").removeClass();
     $(this).addClass("select");
-    $("#number").removeClass();
-    $("#number").addClass("inputOn");
+    $("#numbar").removeClass();
+    $("#numbar").addClass("inputOn");
 
     target = {
       id: this.id,
@@ -15,15 +15,15 @@ for(cell of suudoku_bord_Els){
 
   })
 }
-$("#number>div>div").on("click",function(){
+$("#numbar>div>div").on("click",function(){
   let key = $(this).text();
   if(isNaN(key)||key>9||key<0)  key = "";
   game_bord[target.colmun][target.row]= key ? key:0;
   target.length=0;
   $(".select").text(key);
   $(".select").removeClass();
-    $("#number").removeClass();
-    $("#number").addClass("inputOff");
+    $("#numbar").removeClass();
+    $("#numbar").addClass("inputOff");
 })
 window.addEventListener("keyup",function(event){
   let key = Number(event.key);
