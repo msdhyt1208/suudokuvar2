@@ -15,7 +15,7 @@ for(cell of suudoku_bord_Els){
 
   })
 }
-$("#number>div>div").on("keyup",function(event){
+$("#number>div>div").on("click",function(){
   let key = $("this").text();
   if(isNaN(key)||key>9||key<0)  key = "";
   game_bord[target.colmun][target.row]= key ? key:0;
