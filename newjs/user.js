@@ -16,23 +16,20 @@ for(cell of suudoku_bord_Els){
   })
 }
 $("#numbar>div>div").on("click",function(){
-  let key = $(this).text();
-  if(isNaN(key)||key>9||key<0)  key = "";
-  game_bord[target.colmun][target.row]= key ? key:0;
-  target.length=0;
-  $(".select").text(key);
-  $(".select").removeClass();
-    $("#numbar").removeClass();
-    $("#numbar").addClass("inputOff");
+  keyUp(Number($(this).text()));
+  $("#numbar").removeClass();
+  $("#numbar").addClass("inputOff");  
 })
 window.addEventListener("keyup",function(event){
-  let key = Number(event.key);
+  keyUp(Number(event.key));
+})
+function keyUp(key){
   if(isNaN(key)||key>9||key<0)  key = "";
   game_bord[target.colmun][target.row]= key ? key:0;
   target.length=0;
   $(".select").text(key);
   $(".select").removeClass();
-})
+}
 
 async function auto (){
   let id = 10;
@@ -82,20 +79,19 @@ async function auto (){
       possible.length = 0;
       possible.push(...record[i].possible);
       record.length = i;
-      
     }
     else {
       $(`#${id}`).text(num);
-      const strRow = Math.floor((target.row-1)/3)*3+1;
-      const strcolmun = Math.floor((target.colmun-1)/3)*3+1;
-      
+
+      const strRow = Math.floor((row-1)/3)*3+1;
+      const strcolmun = Math.floor((colmun-1)/3)*3+1;
       possible[colmun][row].length = 0;
       for(let i=1;i<10;i++){
         possible[colmun][i] = possible[colmun][i].filter(value => value!= num); 
         possible[i][row] = possible[i][row].filter(value => value!= num); 
         moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
         possible[strcolmun+moveColmun][strRow+moveRow] =
-         possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num);
+        possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num);
       }
       num =10;
 
@@ -106,12 +102,13 @@ async function auto (){
       });
     }
 
-    
+    console.log(record)
     
     await stop(0.1);
     
   }
 }
+
 const autoButton = document.querySelector(`#button-auto`);
 autoButton.addEventListener("click",()=>{
   console.log("auto");
