@@ -173,12 +173,10 @@ function possibleNone(id,num,possible,bord){
 
   for(let i=1;i<10;i++){
     moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
-    possibleColmun.push(...(possible[colmun][i].filter(value => value!= num)),
-                                                    bord[colmun][i]);
-    possibleRow.push(...(possible[i][row].filter(value => value!= num)),
-                                                    bord[i][row]);
-    possibleBlock.push(...(possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num)),
-                        bord[strcolmun+moveColmun][strRow+moveRow]);
+    possibleColmun.push(...possible[colmun][i],...bord[colmun][i]);
+    possibleRow.push(...(possible[i][row]....bord[i][row]);
+    possibleBlock.push(...(possible[strcolmun+moveColmun][strRow+moveRow],
+                       ...bord[strcolmun+moveColmun][strRow+moveRow]);
   }
   for(let i=1;i<10;i++){    
     if(possibleColmun.filter((num)=> num == i).length == 0) return false;
