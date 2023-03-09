@@ -11,8 +11,6 @@ for(cell of suudoku_bord_Els){
       row: Math.floor(this.id%9)+1,
       colmun:Math.floor(this.id/9)+1, 
     }
-    target.block = Math.floor((target.colmun-1)/3)*3+Math.floor((target.row-1)/3)+1;
-
   })
 }
 $("#numbar>div>div").on("click",function(){
@@ -34,7 +32,22 @@ function keyUp(key){
 async function auto (){
   let id = 10;
   let num = 10;
+  if(!theEnd(suudoku_bord_Els)){
+    i = record.length-1;
+    target = record[i].target;
+    id = target.id;
+    game_bord[target.colmun][target.row] = 0;
+    $(`#${id}`).text("");
+    while(id == record[i].target.id){
+      i--;
+    }
+    num = 1;
+    record.length = i;
+    
+  }
+  id= 0;
   while(theEnd(suudoku_bord_Els)){
+    
     if(num==10){
       const min = Math.min(
         ...possible.map((arrays)=>{
@@ -58,6 +71,11 @@ async function auto (){
       block:Math.floor((colmun-1)/3)*3+Math.floor((row-1)/3)+1
     }
     num = game_bord[colmun][row]+1;
+    record.push({
+      target: JSON.parse(JSON.stringify(target)),
+      bord:JSON.parse(JSON.stringify(game_bord)),
+      possible:JSON.parse(JSON.stringify(possible))
+    });
     while(num<10){
       game_bord[colmun][row] = num;
       if(!spaseFind(possible)){
@@ -95,16 +113,12 @@ async function auto (){
       }
       num =10;
 
-      record.push({
-        target: JSON.parse(JSON.stringify(target)),
-        bord:JSON.parse(JSON.stringify(game_bord)),
-        possible:JSON.parse(JSON.stringify(possible))
-      });
+
     }
 
     console.log(record)
     
-    await stop(0.1);
+    await stop(0);
     
   }
 }
@@ -115,8 +129,22 @@ autoButton.addEventListener("click",()=>{
   for(id in suudoku_bord_Els){
     if(isNaN(id)) break;
     if($("#"+id).text() == "") continue;
-    possible[Math.floor(id/9)+1][id%9+1].length = 0;
+    const colmun = Math.floor(id/9)+1;
+    const row = id%9+1;
+    const strRow = Math.floor((row-1)/3)*3+1;
+    const strcolmun = Math.floor((colmun-1)/3)*3+1;
+    possible[colmun][row].length = 0;
+    num = Number($("#"+id).text());
+    for(let i=1;i<10;i++){
+      possible[colmun][i] = possible[colmun][i].filter(value => value!= num); 
+      possible[i][row] = possible[i][row].filter(value => value!= num); 
+      moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
+      possible[strcolmun+moveColmun][strRow+moveRow] =
+      possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num);
+    }
+    game_bord[Math.floor(id/9)+1][id%9+1] = num;
   }
+  console.log(game_bord)
   auto();
 })
 const startButton = document.querySelector(`#button-start`);
