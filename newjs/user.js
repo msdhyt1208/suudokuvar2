@@ -146,6 +146,7 @@ async function auto (){
           possible[strcolmun+moveColmun][strRow+moveRow] =
           possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num);
         }
+        possibles(JSON.parse(JSON.stringify(game_bord)));
         num =10;
   
   
@@ -153,7 +154,7 @@ async function auto (){
   
       console.log(record)
       
-      await stop(0);
+      await stop(1);
       
     }
   }
@@ -179,7 +180,7 @@ autoButton.addEventListener("click",()=>{
     }
     game_bord[Math.floor(id/9)+1][id%9+1] = num;
   }
-  console.log(game_bord)
+  console.log(...game_bord)
   auto();
 })
 const startButton = document.querySelector(`#button-start`);

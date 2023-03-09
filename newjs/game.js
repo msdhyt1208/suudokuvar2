@@ -148,23 +148,42 @@ function spaseFind (possible){
   }
   return true;
 }
-function possibleNone(id,possible,bord){
+function possibles(bord) {
+  for(id in suudoku_bord_Els){
+    if(isNaN(id)) break;
+    for (num of possible[Math.floor(id/9)+1][id%9+1]){
+      // if(!possibleNone(id,num,JSON.parse(JSON.stringify(possible)),JSON.stringify(bord)))
+      // possible[Math.floor(id/9)+1][id%9+1]=
+      // possible[Math.floor(id/9)+1][id%9+1].filter( val =>val!=num);
+    }
+  }
+  console.log(possible)
+}
+function possibleNone(id,num,possible,bord){
   const row = id%9+1;  
   const colmun = Math.floor(id/9)+1;
   const strRow = Math.floor((row-1)/3)*3+1;
   const strcolmun = Math.floor((colmun-1)/3)*3+1;
+  const possibleColmun = [];
+  const possibleRow =[];
+  const possibleBlock = [];
+  bord[colmun][row] = num;
+  possible[colmun][row].length = 0;
+  console.log(possible)
 
-  possibleAll = [];
   for(let i=1;i<10;i++){
     moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
-    possibleAll.push(...possible[colmun][i],bord[colmun][i],
-                        ...possible[i][row],bord[i][row],
-                        ...possible[strcolmun+moveColmun][strRow+moveRow],
+    possibleColmun.push(...(possible[colmun][i].filter(value => value!= num)),
+                                                    bord[colmun][i]);
+    possibleRow.push(...(possible[i][row].filter(value => value!= num)),
+                                                    bord[i][row]);
+    possibleBlock.push(...(possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num)),
                         bord[strcolmun+moveColmun][strRow+moveRow]);
   }
   for(let i=1;i<10;i++){    
-    // console.log(possibleAll.filter((num)=> num == i));
-    if(possibleAll.filter((num)=> num == i).length == 0) return false;
+    if(possibleColmun.filter((num)=> num == i).length == 0) return false;
+    if(possibleRow.filter((num)=> num == i).length == 0) return false;
+    if(possibleBlock.filter((num)=> num == i).length == 0) return false;
   }
   
   return true;
