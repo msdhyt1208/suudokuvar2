@@ -140,7 +140,6 @@ function cheak(selc,target){
 }
 function spaseFind (possible){
   for(id in suudoku_bord_Els){
-    // let idElement = document.querySelector("#"+id);
     if(isNaN(id)) break;
     row    = id%9+1;
     colmun = Math.floor(id/9)+1; 
@@ -149,8 +148,30 @@ function spaseFind (possible){
   }
   return true;
 }
-function theEnd (elemen){
-  for(i of elemen){
+function possibleNone(id,possible,bord){
+  const row = id%9+1;  
+  const colmun = Math.floor(id/9)+1;
+  const strRow = Math.floor((row-1)/3)*3+1;
+  const strcolmun = Math.floor((colmun-1)/3)*3+1;
+
+  possibleAll = [];
+  for(let i=1;i<10;i++){
+    moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
+    possibleAll.push(...possible[colmun][i],bord[colmun][i],
+                        ...possible[i][row],bord[i][row],
+                        ...possible[strcolmun+moveColmun][strRow+moveRow],
+                        bord[strcolmun+moveColmun][strRow+moveRow]);
+  }
+  for(let i=1;i<10;i++){    
+    // console.log(possibleAll.filter((num)=> num == i));
+    if(possibleAll.filter((num)=> num == i).length == 0) return false;
+  }
+  
+  return true;
+
+}
+function theEnd (elm){
+  for(i of elm){
     if(i.textContent != "")continue;
     return true;
   }
