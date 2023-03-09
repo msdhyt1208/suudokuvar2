@@ -174,7 +174,7 @@ function possibleNone(id,num,possible,bord){
   for(let i=1;i<10;i++){
     moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
     possibleColmun.push(...possible[colmun][i],...bord[colmun][i]);
-    possibleRow.push(...(possible[i][row]....bord[i][row]);
+    possibleRow.push(...(possible[i][row],...bord[i][row]);
     possibleBlock.push(...(possible[strcolmun+moveColmun][strRow+moveRow],
                        ...bord[strcolmun+moveColmun][strRow+moveRow]);
   }
