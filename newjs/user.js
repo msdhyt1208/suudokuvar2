@@ -118,14 +118,7 @@ autoButton.addEventListener("click",()=>{
   for(id in suudoku_bord_Els){
     if(isNaN(id)) break;
     if($("#"+id).text() == "") continue;
-    possible[Math.floor(id/9)+1][id%9+1].length = 0;  
-    for(let i=1;i<10;i++){
-        possible[colmun][i] = possible[colmun][i].filter(value => value!= num); 
-        possible[i][row] = possible[i][row].filter(value => value!= num); 
-        moveColmun = Math.floor((i-1)/3);moveRow= (i-1)%3;
-        possible[strcolmun+moveColmun][strRow+moveRow] =
-        possible[strcolmun+moveColmun][strRow+moveRow].filter(value=> value!=num);
-      }
+    possible[Math.floor(id/9)+1][id%9+1].length = 0;
   }
   auto();
 })
